@@ -1,0 +1,23 @@
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.inputLabel {
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 16px;
+  width: 70px;
+}
+
+.inputField {
+  min-width: 240px;
+  height: 26px;
+}
+
+.unitSpan {
+  font-size: 16px;
+  margin-left: 4px;
+  min-width: 40px;
+}

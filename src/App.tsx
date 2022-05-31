@@ -1,26 +1,67 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Input from "./components/Input";
+import Select from "./components/Select";
+import { WEIGHT_UNITS, HEIGHT_UNITS, UNITS } from "./constants";
+import {
+  feetsToMeters,
+  kilogramsToPounds,
+  metersToFeets,
+  poundsToKilograms,
+} from "./utils/conversion";
+import "./App.scss";
 
-function App() {
+const App: React.FC = () => {
+  const [weight, setWeight] = useState<number>(0);
+  const [height, setHeight] = useState<number>(0);
+  const [unit, setUnit] = useState<string>(UNITS[0]);
+
+  const handleUnitChange = (option: string) => {
+    setUnit(option);
+
+    if (option === UNITS[0]) {
+      // imperial
+      setWeight(kilogramsToPounds(weight));
+      setHeight(metersToFeets(height));
+    } else {
+      // metric
+      setWeight(poundsToKilograms(weight));
+      setHeight(feetsToMeters(height));
+    }
+  };
+
+  const handleWeightChange = (value: number) => {
+    setWeight(value);
+  };
+
+  const handleHeightChange = (value: number) => {
+    setHeight(value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="conversion-app">
+      <form className="conversion-form">
+        <p className="conversion-form--title">Conversion</p>
+        <Input
+          label="Weight"
+          value={weight}
+          unitLabel={WEIGHT_UNITS[unit]}
+          onChange={handleWeightChange}
+        />
+        <Input
+          label="Height"
+          value={height}
+          unitLabel={HEIGHT_UNITS[unit]}
+          onChange={handleHeightChange}
+        />
+        <Select
+          label="Unit"
+          value={unit}
+          options={UNITS}
+          onChange={handleUnitChange}
+        />
+      </form>
     </div>
   );
-}
+};
 
 export default App;

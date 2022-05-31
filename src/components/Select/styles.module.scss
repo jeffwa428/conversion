@@ -1,0 +1,17 @@
+.selectWrapper {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.selectLabel {
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 16px;
+  width: 70px;
+}
+
+.selectField {
+  min-width: 240px;
+  height: 32px;
+}
